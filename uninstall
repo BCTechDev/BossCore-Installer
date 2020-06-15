@@ -1,0 +1,16 @@
+echo ====   Boss Installer Version 1.0   ====
+echo Type in the package name you want to uninstall please
+read package
+echo "Alright, we'll uninstall $package and all of it's dependencies."
+snap remove "$package" > /dev/null 2>&1
+ if [ %errorlevel% != 0 ];
+then
+ flatpak uninstall "$package" > /dev/null 2>&1
+  if [ %errorlevel% != 0 ];
+ then
+  sudo apt-get remove "$package" -y > cache.txt && sudo apt-get install -f -y > cache.txt 
+  fi
+fi
+rm cache.txt
+echo Uninstallation complete
+echo "If you ever want to reinstall this application, just type install."

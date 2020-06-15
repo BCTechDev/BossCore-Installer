@@ -1,0 +1,12 @@
+echo ====   Boss Installer Version 1.0   ====
+echo Type in the package name you want to install please
+read package
+echo "Alright, we'll install $package and all of it's dependencies."
+snap install "$package" > /dev/null 2>&1
+ if [ %errorlevel% != 0 ];
+then
+ sudo apt-get install "$package" -y > cache.txt && sudo apt-get install -f -y > cache.txt 
+ fi
+rm cache.txt
+echo Installation complete
+echo "If you ever want to remove this application, do sudo uninstall $package , and if you don't plan on using it again do sudo full-uninstall $package "
